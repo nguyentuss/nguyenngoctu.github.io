@@ -27,7 +27,7 @@ $$
 \cov[X,Y]\triangleq\mean[(X-\mean[X])(Y-\mean[Y])]=\mean[XY]-\mean[X]\mean[Y]
 $$
 
-If \(\mathbf{x}\) is a \(D\)-dimensional random vector, its **covariance matrix** is defined as
+If $\mathbf{x}$ is a $D$-dimensional random vector, its **covariance matrix** is defined as
 
 $$
 \cov[\mathbf{x}]\triangleq\mean\Bigl[(\mathbf{x}-\mean[\mathbf{x}])(\mathbf{x}-\mean[\mathbf{x}])^T\Bigr] \triangleq \mathbf{Cov} =

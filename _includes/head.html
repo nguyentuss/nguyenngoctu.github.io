@@ -103,7 +103,14 @@
   <!-- Custom MathJax configuration -->
   <script type="text/javascript">
     window.MathJax = {
+      loader: {
+        // Load the 'ams' extension for bold symbols, etc.
+        load: ['[tex]/ams'],
+      },
       tex: {
+        // Enable 'ams' in TeX packages
+        packages: { '[+]': ['ams'] },
+
         inlineMath: [
           ['$', '$'],
           ['\\(', '\\)'],

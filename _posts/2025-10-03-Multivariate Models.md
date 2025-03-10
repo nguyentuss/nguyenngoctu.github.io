@@ -8,7 +8,6 @@ math: true
 # author: "Your Name"
 ---
 
-
 # Multivariate Models
 
 ------------------------------------------------------------------------
@@ -17,64 +16,78 @@ math: true
 
 ### Covariance
 
-The **covariance** between two rv's \(X\) and \(Y\) measures the **direction** of the **linear relationship** to which \(X\) and \(Y\) are (linearly) related. It quantifies how the random variables change together.
+The **covariance** between two random variables ${X}$ and ${Y}$ measures the **direction** of the **linear relationship** to which ${X}$ and ${Y}$ are (linearly) related. It quantifies how the random variables change together.
 
 -   Positive: If one increases, the other also increases.
 -   Negative: If one increases while the other decreases.
 -   Zero: There is no relationship between the variables.
 
+  
 $$
-\cov[X,Y]\triangleq\mean[(X-\mean[X])(Y-\mean[Y])]=\mean[XY]-\mean[X]\mean[Y]
+\textrm{Cov}[X,Y] \triangleq \mathbb{E}\Bigl[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])\Bigr] = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y]
 $$
+  
 
-If $\mathbf{x}$ is a $D$-dimensional random vector, its **covariance matrix** is defined as
+If ${\mathbf{x}}$ is a $D$-dimensional random vector, its **covariance matrix** is defined as
 
+  
 $$
-\cov[\mathbf{x}]\triangleq\mean\Bigl[(\mathbf{x}-\mean[\mathbf{x}])(\mathbf{x}-\mean[\mathbf{x}])^T\Bigr] \triangleq \mathbf{Cov} =
+\textrm{Cov}[\mathbf{x}] \triangleq \mathbb{E}\Bigl[(\mathbf{x}-\mathbb{E}[\mathbf{x}])(\mathbf{x}-\mathbb{E}[\mathbf{x}])^T\Bigr] \triangleq \mathbf{\Sigma} =
 $$
+  
 
 $$
 \begin{pmatrix}
-        \var[X_1] & \cov[X_1,X_2] & \cdots & \cov[X_1,X_D] \\
-        \cov[X_2,X_1] & \var[X_2] & \cdots &\cov[X_2,X_D] \\
+        \textrm{Var}[X_1] & \textrm{Cov}[X_1,X_2] & \cdots & \textrm{Cov}[X_1,X_D] \\
+        \textrm{Cov}[X_2,X_1] & \textrm{Var}[X_2] & \cdots & \textrm{Cov}[X_2,X_D] \\
         \vdots & \vdots & \ddots & \vdots \\ 
-        \cov[X_D,X_1] & \cov[X_D,X_2] & \cdots & \var[X_D]
+        \textrm{Cov}[X_D,X_1] & \textrm{Cov}[X_D,X_2] & \cdots & \textrm{Var}[X_D]
 \end{pmatrix}
 $$
+  
 
 Covariance itself is the variance of the distribution, from which we can get the important result
 
+  
 $$
-\mean[\mathbf{x}\mathbf{x}^T] = \mathbf{Cov} + \Mean \Mean^T
+\mathbb{E}[\mathbf{x}\mathbf{x}^T] = \mathbf{\Sigma} + \mathbf{\mu}\mathbf{\mu}^T
 $$
+  
 
 Another useful result is that the covariance of a linear transformation
 
+  
 $$
-\cov[\mathbf{A}\mathbf{x}+b]=\mathbf{A}\cov[\mathbf{x}]\mathbf{A}^T
+\textrm{Cov}[\mathbf{A}\mathbf{x} + b] = \mathbf{A}\,\textrm{Cov}[\mathbf{x}]\,\mathbf{A}^T
 $$
+  
 
 The **cross-covariance** between two random vectors is defined by
 
+  
 $$
-\cov[\mathbf{x},\mathbf{y}]=\mean\Bigl[(\mathbf{x}-\mean[\mathbf{x}])(\mathbf{y}-\mean[\mathbf{y}])^T\Bigr]
+\textrm{Cov}[\mathbf{x},\mathbf{y}] = \mathbb{E}\Bigl[(\mathbf{x}-\mathbb{E}[\mathbf{x}])(\mathbf{y}-\mathbb{E}[\mathbf{y}])^T\Bigr]
 $$
+  
 
 ### Correlation
 
 ![image](assets/img/correlation.PNG){: width="700" height="500"}
 
-Covariance can range from negative to positive infinity. Sometimes it is more convenient to work with a normalized measure that is bounded. The **correlation coefficient** between \(X\) and \(Y\) is defined as
+Covariance can range over all real numbers. Sometimes it is more convenient to work with a normalized measure that is bounded. The **correlation coefficient** between ${X}$ and ${Y}$ is defined as
 
+  
 $$
-\rho\triangleq\corr[X,Y]\triangleq\frac{\cov[X,Y]}{\sqrt{\var[X]\var[Y]}}
+\rho \triangleq \textrm{Corr}[X,Y] \triangleq \frac{\textrm{Cov}[X,Y]}{\sqrt{\textrm{Var}[X]\,\textrm{Var}[Y]}}
 $$
+  
 
-While covariance can be any real value, correlation is always between \(-1\leq\rho\leq1\). In the case of a vector \(\mathbf{x}\) of related variables, the correlation matrix is given by
+While covariance can be any real number, correlation is always between ${-1}$ and ${1}$. In the case of a vector ${\mathbf{x}}$ of related variables, the correlation matrix is given by
 
+  
 $$
 \begin{aligned}
-    \corr(\mathbf{x})=
+    \textrm{Corr}(\mathbf{x}) =
     \begin{pmatrix}
     1 & \frac{\mathbb{E}[(X_1 - \mu_1)(X_2 - \mu_2)]}{\sigma_1 \sigma_2} & \cdots & \frac{\mathbb{E}[(X_1 - \mu_1)(X_D - \mu_D)]}{\sigma_1 \sigma_D} \\
     \frac{\mathbb{E}[(X_2 - \mu_2)(X_1 - \mu_1)]}{\sigma_2 \sigma_1} & 1 & \cdots & \frac{\mathbb{E}[(X_2 - \mu_2)(X_D - \mu_D)]}{\sigma_2 \sigma_D} \\
@@ -83,396 +96,302 @@ $$
     \end{pmatrix}
 \end{aligned}
 $$
+  
 
-But note that **uncorrelated does not imply independent**. For example, let \(X\sim\Unif(-1,1)\) and \(Y=X^2\). Even though \(\cov[X,Y]=0\) and \(\corr[X,Y]=0\), \(Y\) clearly depends on \(X\). There are many datasets where \(X\) and \(Y\) exhibit a clear dependence, yet the correlation coefficient is 0.
+Note that **uncorrelated does not imply independent**. For example, if ${X}\sim \textrm{Unif}(-1,1)$ and ${Y} = {X}^2$, even though $\textrm{Cov}[X,Y]=0$ and $\textrm{Corr}[X,Y]=0$, ${Y}$ clearly depends on ${X}$.
 
 ### Simpson Paradox
 
 ![image](assets/img/SimpsonParadox.PNG){: width="700" height="500"}
 
-Simpson's paradox states that a statistical trend or relationship observed in several different groups of data can disappear or reverse when these groups are combined.
+Simpson's paradox demonstrates that a statistical trend observed in several different groups of data can disappear or even reverse when these groups are combined.
 
-## The multivariate Gaussian (normal) distribution
+## The Multivariate Gaussian (Normal) Distribution
 
 The multivariate Gaussian (normal) distribution generalizes the univariate Gaussian to multiple dimensions.
 
+  
 $$
-\N(\mathbf{y};\Mean,\Cov) \triangleq \frac{1}{(2\pi)^{D/2}|\Cov|^{1/2}}\exp\left(-\frac{1}{2}(\mathbf{y}-\Mean)^T\Cov^{-1}(\mathbf{y}-\Mean)\right)
+\mathcal{N}(\mathbf{y};\mathbf{\mu},\mathbf{\Sigma}) \triangleq \frac{1}{(2\pi)^{D/2}|\mathbf{\Sigma}|^{1/2}}\exp\!\left(-\frac{1}{2}(\mathbf{y}-\mathbf{\mu})^T\mathbf{\Sigma}^{-1}(\mathbf{y}-\mathbf{\mu})\right)
 $$
+  
 
-where \(\Mean = \mean[\mathbf{y}] \in \mathbb{R}^D\) is the mean vector, and \(\Cov=\cov[\mathbf{y}]\) is the \(D\times D\) **covariance matrix**.
+where ${\mathbf{\mu}} = \mathbb{E}[\mathbf{y}] \in \mathbb{R}^D$ is the mean vector and ${\mathbf{\Sigma}} = \textrm{Cov}[\mathbf{y}]$ is the $D\times D$ covariance matrix.
 
 ![image](assets/img/MVN.PNG){: width="700" height="500"}
 
-In 2D, the MVN is known as the **Bivariate Gaussian** distribution. The pdf can be defined as \(\mathbf{y}\sim\N(\Mean,\Cov)\), where \(\Mean,\mathbf{y}\in\mathbb{R}^2\) and
+In 2D, the MVN is known as the **Bivariate Gaussian** distribution. In this case, if ${\mathbf{y}} \sim \mathcal{N}(\mathbf{\mu},\mathbf{\Sigma})$ with
 
+  
 $$
-\Cov=
+\mathbf{\Sigma} =
 \begin{pmatrix}
-        \sigma_1^2  & \rho\sigma_1\sigma_2  \\
-        \rho\sigma_1\sigma_2 & \sigma_2^2
-\end{pmatrix}
+\sigma_1^2 & \rho\,\sigma_1\,\sigma_2 \\
+\rho\,\sigma_1\,\sigma_2 & \sigma_2^2
+\end{pmatrix},
 $$
+  
 
-A diagonal covariance has \(D\) parameters with 0s in the off-diagonals. A spherical covariance (isotropic variance matrix) is of the form \(\Cov=\sigma^2\mathbf{I}\).
+the marginal distribution ${p(y_1)}$ is a 1D Gaussian given by
 
-### Mahalanobis distance
-
-The log-pdf of a **multivariate Gaussian** is
-
+  
 $$
-\log p(\mathbf{y}\mid\Mean,\Cov)=-\frac{1}{2}(\mathbf{y}-\Mean)^T\Cov^{-1}(\mathbf{y}-\Mean) + \text{const}
+p(y_1) = \mathcal{N}(y_1 \mid \mu_1, \sigma_1^2)
 $$
+  
 
-The quadratic term 
+and if we observe ${y_2}$, the conditional distribution is
 
+  
 $$
-(\mathbf{y}-\Mean)^T\Cov^{-1}(\mathbf{y}-\Mean)
+p(y_1 \mid y_2) = \mathcal{N}\!\Biggl(y_1 \Bigl|\, \mu_1 + \frac{\rho\,\sigma_1\,\sigma_2}{\sigma_2^2}\,(y_2 - \mu_2),\, \sigma_1^2 - \frac{(\rho\,\sigma_1\,\sigma_2)^2}{\sigma_2^2} \Bigr.\Biggr)
 $$
+  
 
-represents the **Mahalanobis distance squared**:
+If $\sigma_1 = \sigma_2 = \sigma$, then
 
+  
 $$
-\Delta^2 \triangleq (\mathbf{y}-\Mean)^T\Cov^{-1}(\mathbf{y}-\Mean)
+p(y_1 \mid y_2) = \mathcal{N}\!\Biggl(y_1 \Bigl|\, \mu_1 + \rho\,(y_2 - \mu_2),\, \sigma^2\,(1 - \rho^2) \Bigr.\Biggr)
 $$
+  
 
-This distance measures how far a point is from the distribution’s mean, taking into account the shape of the data distribution. Contours of constant (log) probability correspond to contours of constant Mahalanobis distance.
+For instance, if ${\rho = 0.8}$, ${\sigma_1 = \sigma_2 = 1}$, ${\mu_1 = \mu_2 = 0}$, and ${y_2} = 1$, then $\mathbb{E}[y_1 \mid y_2 = 1] = 0.8$ and
 
-To gain insight into these contours, consider the eigendecomposition of \(\Cov\):
-
+  
 $$
-\Cov = \sum_{d=1}^{D} \lambda_d u_d u_d^T
+\textrm{Var}(y_1 \mid y_2 = 1) = 1 - 0.8^2 = 0.36.
 $$
+  
 
-where \(u_d\) are the eigenvectors of \(\Cov\) and \(\lambda_d\) are the eigenvalues. Since \(\Cov\) is positive definite, its inverse is
+### Marginals and Conditionals of an MVN
 
+Suppose ${\mathbf{y}} = (y_1, y_2)$ is jointly Gaussian with parameters
+
+  
 $$
-\Cov^{-1} = \sum_{d=1}^{D} \frac{1}{\lambda_d} u_d u_d^T
-$$
-
-Defining \(z_d\triangleq u_d^T(\mathbf{y}-\Mean)\) so that \(z=U(\mathbf{y}-\Mean)\), the Mahalanobis distance can be written as
-
-$$
-(\mathbf{y}-\Mean)^T\Cov^{-1}(\mathbf{y}-\Mean)=\sum_{d=1}^{D}\frac{z_d^2}{\lambda_d}
-$$
-
-### Marginals and conditionals of an MVN
-
-Suppose \(\mathbf{y} = (y_1, y_2)\) is jointly Gaussian with parameters
-
-$$
-\bm{\mu} =
+\mathbf{\mu} =
 \begin{pmatrix}
 \mu_1 \\
 \mu_2
 \end{pmatrix}, \quad
-\bm{\Sigma} =
+\mathbf{\Sigma} =
 \begin{pmatrix}
 \Sigma_{11} & \Sigma_{12} \\
 \Sigma_{21} & \Sigma_{22}
-\end{pmatrix}, \quad
-\bm{\Lambda} = \bm{\Sigma}^{-1} =
-\begin{pmatrix}
-\Lambda_{11} & \Lambda_{12} \\
-\Lambda_{21} & \Lambda_{22}
-\end{pmatrix}
+\end{pmatrix}.
 $$
+  
 
-where \(\bm{\Lambda}\) is the **precision matrix**. Then the marginals are given by
+Then the marginals are
 
+  
 $$
 \begin{aligned}
-    p(y_1)&=\N(y_1\mid\mu_1,\Sigma_{11}) \\ 
-    p(y_2)&=\N(y_2\mid\mu_2,\Sigma_{22})
+    p(y_1) &= \mathcal{N}(y_1 \mid \mu_1, \Sigma_{11}), \\[8pt]
+    p(y_2) &= \mathcal{N}(y_2 \mid \mu_2, \Sigma_{22}),
 \end{aligned}
 $$
+  
 
-and the conditional distribution is
+and the conditional is
 
+  
 $$
 \begin{aligned}
-    p(y_1\mid y_2)&=\N(y_1\mid\mu_{1|2},\Sigma_{1|2}) \\
-    \mu_{1|2}&=\mu_1+\Sigma_{12}\Sigma_{22}^{-1}(y_2-\mu_2) \\
-    \Sigma_{1|2}&=\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}
+    p(y_1 \mid y_2) &= \mathcal{N}(y_1 \mid \mu_{1|2}, \Sigma_{1|2}), \\[8pt]
+    \mu_{1|2} &= \mu_1 + \Sigma_{12}\Sigma_{22}^{-1}(y_2 - \mu_2), \\[8pt]
+    \Sigma_{1|2} &= \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}.
 \end{aligned}
 $$
+  
 
-Let us consider a 2D example. The covariance matrix is
+### Example: Missing Data
 
+Suppose we sample ${N=10}$ vectors from an 8D Gaussian and then hide 50% of the data. For each example ${n}$, let ${v}$ denote the indices of the visible features and ${h}$ the hidden ones. With model parameters ${\theta = (\mathbf{\mu}, \mathbf{\Sigma})}$, we compute the marginal distribution
+
+  
 $$
-\bm{\Sigma} =
-\begin{pmatrix}
-\sigma_1^2 & \rho \sigma_1 \sigma_2 \\
-\rho \sigma_1 \sigma_2 & \sigma_2^2
-\end{pmatrix}
+p(\mathbf{y}_{n,h}\mid \mathbf{y}_{n,v}, \theta)
 $$
+  
 
-The marginal \(p(y_1)\) is a 1D Gaussian obtained by projecting the joint distribution onto the \(y_1\) axis:
+for each missing variable ${i \in h}$, and then set the prediction as the posterior mean
 
+  
 $$
-p(y_1) = \mathcal{N}(y_1 \mid \mu_1, \sigma_1^2)
+\bar{y}_{n,i} = \mathbb{E}\!\Bigl[ y_{n,i} \mid \mathbf{y}_{n,v}, \theta \Bigr].
 $$
+  
 
-Suppose we observe \(Y_2 = y_2\); the conditional \(p(y_1 \mid y_2)\) is given by
+The posterior variance
 
+  
 $$
-p(y_1 \mid y_2) = \mathcal{N} \Bigl( y_1 \Big| \mu_1 + \frac{\rho \sigma_1 \sigma_2}{\sigma_2^2} (y_2 - \mu_2), \, \sigma_1^2 - \frac{(\rho \sigma_1 \sigma_2)^2}{\sigma_2^2} \Bigr)
+\textrm{Var}\!\Bigl[y_{n,i} \mid \mathbf{y}_{n,v}, \theta\Bigr]
 $$
+  
 
-If \(\sigma_1 = \sigma_2 = \sigma\), then
+indicates our confidence in that prediction.
 
-$$
-p(y_1 \mid y_2) = \mathcal{N} \Bigl( y_1 \Big| \mu_1 + \rho (y_2 - \mu_2), \, \sigma^2 (1 - \rho^2) \Bigr)
-$$
+## Linear Gaussian Systems
 
-For example, if \(\rho = 0.8\), \(\sigma_1 = \sigma_2 = 1\), \(\mu_1 = \mu_2 = 0\), and \(y_2 = 1\), then \(\mathbb{E}[y_1 \mid y_2 = 1] = 0.8\) and
+Consider a scenario where ${z\in \mathbb{R}^L}$ is an unknown value and ${y\in \mathbb{R}^D}$ is a noisy measurement of ${z}$. Assume
 
-$$
-\text{Var}(y_1 \mid y_2 = 1) = 1 - 0.8^2 = 0.36.
-$$
-
-If \(\rho = 0\), then \(p(y_1 \mid y_2) = \mathcal{N}(y_1 \mid \mu_1, \sigma_1^2)\) since \(y_2\) conveys no information about \(y_1\).
-
-### Example: Missing data
-
-Suppose we sample \(N=10\) vectors from an 8D Gaussian, and then hide 50% of the data. We compute the missing entries given the observed entries and the true model parameters. For each example \(n\) in the data matrix, we compute
-
-$$
-p(\mathbf{y}_{n,h}\mid\mathbf{y}_{n,v},\theta)
-$$
-
-where for data point \(n\), \(v\) denotes indices of the visible features and \(h\) the indices of the hidden features, with \(\theta=(\Mean,\Cov)\). From this marginal distribution for each missing variable \(i\in\mathbf{h}\), we compute the posterior mean
-
-$$
-\bar{y}_{n,i} = \mathbb{E} \Bigl[ y_{n,i} \mid \mathbf{y}_{n,v}, \theta \Bigr].
-$$
-
-The posterior mean represents our "best guess" for that entry (minimizing expected squared error), and the variance
-
-$$
-\var\Bigl[y_{n,i}\mid \mathbf{y}_{n,v}, \theta\Bigr]
-$$
-
-measures our confidence. A small variance indicates that the prediction (posterior mean) is likely close to the actual value, whereas a large variance indicates higher uncertainty.
-
-## Linear Gaussian systems
-
-We now extend this approach to handle noisy observations. Let \(z\in\mathbb{R}^L\) be an unknown data value, and \(y\in\mathbb{R}^D\) be a noisy measurement of \(z\). We assume they are related via the joint distribution
-
+  
 $$
 \begin{aligned}
-    p(z)&=\N(z\mid\mu_z,\Cov_z) \\
-    p(y\mid z)&=\N(y\mid Wz+b,\Cov_y)
+    p(z) &= \mathcal{N}(z \mid \mu_z, \Sigma_z), \\[8pt]
+    p(y \mid z) &= \mathcal{N}(y \mid Wz + b, \Sigma_y),
 \end{aligned}
 $$
+  
 
-where \(W\) is a \(D\times L\) matrix. This constitutes a **linear Gaussian system**.
+where ${W}$ is a ${D\times L}$ matrix. The joint distribution ${p(z,y) = p(z)p(y\mid z)}$ is an $(L+D)$-dimensional Gaussian with mean
 
-The joint distribution \(p(z,y)=p(z)p(y\mid z)\) is an \((L+D)\)-dimensional Gaussian with mean
-
+  
 $$
 \mu =
 \begin{pmatrix}
 \mu_z \\
-W \mu_z + b
+W\,\mu_z + b
 \end{pmatrix}
 $$
+  
 
 and covariance
 
+  
 $$
-\Cov =
+\Sigma =
 \begin{pmatrix}
-\Cov_z & \Cov_z W^T \\
-W \Cov_z & \Cov_y + W \Cov_z W^T
-\end{pmatrix}
+\Sigma_z & \Sigma_z\,W^T \\
+W\,\Sigma_z & \Sigma_y + W\,\Sigma_z\,W^T
+\end{pmatrix}.
 $$
+  
 
-### Bayes rule for Gaussians
+### Bayes Rule for Gaussians
 
-The posterior is given by
+The posterior distribution is
 
-$$
-\begin{aligned}
-    p(z\mid y)&=\N(z\mid\mu_{z\mid y},\Cov_{z\mid y}) \\
-    \Cov_{z\mid y}^{-1}&=\Cov_{z}^{-1} + W^T\Cov_y^{-1}W \\ 
-    \mu_{z\mid y}&= \Cov_{z\mid y}\Bigl[W^T\Cov_y^{-1}(y-b)+\Cov_z^{-1}\mu_z\Bigr]
-\end{aligned}
-$$
-
-The normalization constant of the posterior is given by
-
+  
 $$
 \begin{aligned}
-    p(y)&=\int\N(z\mid\mu_z,\Cov_z)\N(y\mid Wz+b,\Cov_y)dz \\
-    &= \N(y\mid W\mu_z+b,\Cov_y+W\Cov_zW^T)
+    p(z \mid y) &= \mathcal{N}(z \mid \mu_{z \mid y}, \Sigma_{z \mid y}), \\[8pt]
+    \Sigma_{z \mid y}^{-1} &= \Sigma_z^{-1} + W^T\,\Sigma_y^{-1}\,W, \\[8pt]
+    \mu_{z \mid y} &= \Sigma_{z \mid y}\Bigl[ W^T\,\Sigma_y^{-1}(y - b) + \Sigma_z^{-1}\mu_z \Bigr].
 \end{aligned}
 $$
+  
+
+The normalization constant is given by
+
+  
+$$
+\begin{aligned}
+    p(y) &= \int \mathcal{N}(z \mid \mu_z, \Sigma_z)\,\mathcal{N}(y \mid Wz+b, \Sigma_y)\,dz \\[8pt]
+         &= \mathcal{N}\Bigl(y \mid W\,\mu_z+b,\, \Sigma_y+W\,\Sigma_z\,W^T\Bigr).
+\end{aligned}
+$$
+  
 
 ### Derivation
 
 The log of the joint distribution is
 
+  
 $$
 \begin{aligned}
-    \log p(z,y) = &-\frac{1}{2}(z-\mu_z)^T\Cov_z^{-1}(z-\mu_z) \\
-    &-\frac{1}{2}(y-Wz-b)^T\Cov_y^{-1}(y-Wz-b)
+    \log p(z,y) = &-\frac{1}{2}(z-\mu_z)^T\,\Sigma_z^{-1}(z-\mu_z) \\
+    &-\frac{1}{2}(y-Wz-b)^T\,\Sigma_y^{-1}(y-Wz-b).
 \end{aligned}
 $$
+  
 
-This is a joint Gaussian distribution since it is the exponential of a quadratic form.
+This quadratic form can be rearranged (by completing the square) to derive the expressions for ${\Sigma_{z \mid y}}$ and ${\mu_{z \mid y}}$.
 
-It can be rearranged as
+### Example: Inferring an Unknown Scalar
 
+Suppose we make ${N}$ noisy measurements ${y_i}$ of a scalar ${z}$ with measurement noise precision ${\lambda_y = \frac{1}{\sigma^2}}$:
+
+  
 $$
-Q = -\frac{1}{2} 
-\begin{pmatrix} 
-z \\ y 
-\end{pmatrix}^T
-\begin{pmatrix} 
-\Sigma_z^{-1} + W^T \Sigma_y^{-1} W & -W^T \Sigma_y^{-1} \\
-- \Sigma_y^{-1} W & \Sigma_y^{-1} 
-\end{pmatrix}
-\begin{pmatrix} 
-z \\ y 
-\end{pmatrix}
+p(y_i \mid z) = \mathcal{N}(y_i \mid z, \lambda_y^{-1}),
 $$
+  
 
-where the precision matrix is defined as
+and assume a prior
 
+  
 $$
-\Sigma^{-1} =
-\begin{pmatrix} 
-\Sigma_z^{-1} + W^T \Sigma_y^{-1} W & -W^T \Sigma_y^{-1} \\
-- \Sigma_y^{-1} W & \Sigma_y^{-1} 
-\end{pmatrix}
-\triangleq \Lambda =
-\begin{pmatrix} 
-\Lambda_{zz} & \Lambda_{zy} \\
-\Lambda_{yz} & \Lambda_{yy} 
-\end{pmatrix}
+p(z) = \mathcal{N}(z \mid \mu_0, \lambda_0^{-1}).
 $$
+  
 
-Using standard results for the conditional distribution of Gaussians, we have
+Then the posterior is
 
+  
 $$
-p(z \mid y) = \N(\mu_{z|y}, \Sigma_{z|y})
+p(z \mid y_1,\dots,y_N) = \mathcal{N}(z \mid \mu_N, \lambda_N^{-1}),
 $$
+  
 
 with
 
+  
 $$
-\Sigma_{z|y} = \Lambda_{zz}^{-1} = \left( \Sigma_z^{-1} + W^T \Sigma_y^{-1} W \right)^{-1}
+\lambda_N = \lambda_0 + N\,\lambda_y
 $$
+  
 
 and
 
+  
 $$
-\begin{aligned}
-    \mu_{z|y} &= \Sigma_{z|y}\Bigl[ \Lambda_{zz}\mu_z - \Lambda_{zy}(y-(W\mu_z+b)) \Bigr] \\
-    &= \Sigma_{z|y}\Bigl[ \Sigma_z^{-1}\mu_z + W^T \Sigma_y^{-1}(y-b) \Bigr]
-\end{aligned}
+\mu_N = \frac{N\,\lambda_y\,\overline{y} + \lambda_0\,\mu_0}{\lambda_N}.
 $$
+  
 
-When working with linear Gaussian systems, it is common to complete the square in the exponent. In the scalar case, a quadratic function
+In other words, the posterior mean is a weighted average of the prior mean and the sample mean. The posterior variance is
 
+  
 $$
-f(x) = ax^2 + bx + c
+\tau_N^2 = \frac{\sigma^2\,\tau_0^2}{N\,\tau_0^2 + \sigma^2},
 $$
+  
 
-can be rewritten as
+which decreases as more data is observed.
 
+Sequential updates follow the same principle. After observing ${y_1}$:
+
+  
 $$
-a(x-h)^2 + k \quad \text{with} \quad h = \frac{-b}{2a}, \quad k = c - \frac{b^2}{4a}.
+p(z \mid y_1) = \mathcal{N}(z \mid \mu_1, \sigma_1^2)
 $$
-
-In the vector case, one can similarly complete the square for
-
-$$
-x^T A x + x^T b + c.
-$$
-
-### Example: Inferring an unknown scalar
-
-Suppose we make \(N\) noisy measurements \(y_i\) of a scalar \(z\) with fixed measurement noise precision \(\lambda_y=\frac{1}{\sigma^2}\):
-
-$$
-p(y_i\mid z) = \N(y_i\mid z,\lambda_y^{-1})
-$$
-
-and a prior
-
-$$
-p(z)=\N(z\mid\mu_0,\lambda_0^{-1})
-$$
-
-The posterior is given by
-
-$$
-p(z\mid y_1,\dots,y_N) = \N(z\mid\mu_N,\lambda_N^{-1})
-$$
-
-where the posterior precision is
-
-$$
-\lambda_N=\lambda_0+N\lambda_y
-$$
-
-and the posterior mean is
-
-$$
-\mu_N=\frac{N\lambda_y \overline{y} + \lambda_0\mu_0}{\lambda_N}
-$$
-
-which can also be written as
-
-$$
-\mu_N=\frac{\sigma^2\mu_0+\tau_0^2\overline{y}}{N\tau_0^2+\sigma^2}
-$$
-
-The posterior **variance** is
-
-$$
-\tau_N^2 = \frac{\sigma^2 \tau_0^2}{N\tau_0^2 + \sigma^2}
-$$
-
-This variance shrinks as we incorporate more measurements, reducing our uncertainty about \(z\).
-
-We can also update sequentially. After observing \(y_1\),
-
-$$
-p(z \mid y_1) = \N(z \mid \mu_1, \sigma_1^2)
-$$
+  
 
 with
 
+  
 $$
-\mu_1 = \frac{\sigma_y^2 \mu_0 + \sigma_0^2 y_1}{\sigma_0^2 + \sigma_y^2}, \quad
-\sigma_1^2 = \frac{\sigma_0^2 \sigma_y^2}{\sigma_0^2 + \sigma_y^2}.
+\mu_1 = \frac{\sigma_y^2\,\mu_0 + \sigma_0^2\,y_1}{\sigma_0^2 + \sigma_y^2}, \quad
+\sigma_1^2 = \frac{\sigma_0^2\,\sigma_y^2}{\sigma_0^2 + \sigma_y^2}.
 $$
+  
 
-Then treat \(p(z \mid y_1)\) as the new prior and update with \(y_2\), and so on. After \(N\) observations, the updates are
-
-$$
-\mu_N = \frac{\sigma_y^2 \mu_{N-1} + \sigma_{N-1}^2 y_N}{\sigma_{N-1}^2 + \sigma_y^2}
-$$
-
-$$
-\sigma_N^2 = \frac{\sigma_{N-1}^2 \sigma_y^2}{\sigma_{N-1}^2 + \sigma_y^2}
-$$
-
-- **Posterior Variance Decreases:** Each new observation reduces uncertainty.
-- **Posterior Mean as Weighted Average:** It balances the prior mean and observed data.
-- **Sequential Bayesian Update:** The previous posterior becomes the new prior.
+Then, using ${p(z \mid y_1)}$ as the new prior, subsequent updates follow similarly.
 
 **Signal-to-noise Ratio (SNR):**
 
-To quantify the influence of the prior relative to the measurement noise, define
+To assess the influence of the prior relative to measurement noise, define
 
+  
 $$
-\text{SNR} = \frac{\mathbb{E}[Z^2]}{\mathbb{E}[\epsilon^2]} = \frac{\Sigma_0 + \mu_0^2}{\Sigma_y}
+\text{SNR} = \frac{\mathbb{E}[Z^2]}{\mathbb{E}[\epsilon^2]} = \frac{\Sigma_0 + \mu_0^2}{\Sigma_y}.
 $$
+  
 
-This ratio compares the prior variance (and mean) to the measurement noise, indicating how much the data refines our estimate.
+This ratio indicates how much the data refines our estimate of ${z}$.
 
 ## Mixture Models
